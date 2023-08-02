@@ -1,0 +1,17 @@
+def subsetII(nums):
+    ans = []
+    temp = []
+    findsub(0, nums, temp, ans)
+    return ans
+def findsub(ind, nums, temp, ans):
+    if ind == len(nums):
+        ans.append(temp[:])
+        return
+    for i in range(ind, len(nums)):
+        if i != ind and nums[i] == nums[i-1]:
+            continue
+        temp.append(nums[i])
+        findsub(i+1, nums, temp, ans)
+        temp.pop()
+nums = [1, 2, 2, 2, 3, 3]
+print(subsetII(nums))

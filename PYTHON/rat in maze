@@ -1,0 +1,29 @@
+def solve(i, j, arr, ans, n, vis, move, di, dj):
+    if i == n-1 and j == n-1:
+        ans.append(move)
+        return
+    dir = "DLRU"
+    for k in range(4):
+        nexti = i + di[k]
+        nextj = j + dj[k]
+        if nexti >= 0 and nextj >= 0 and nexti < n and nextj < n and not vis[nexti][nextj] and arr[nexti][nextj] == 1:
+            vis[nexti][nextj] = 1
+            solve(nexti, nextj, arr, ans, n, vis, move+dir[k], di, dj )
+            vis[nexti][nextj] = 0
+def findpath(arr, n):
+    ans = []
+    vis = [[0 for i in range(n)] for i in range(n)]
+    di = [+1, 0, 0, -1]
+    dj = [0, -1, 1, 0]
+    if arr[0][0] == 1:
+        solve(0, 0, arr, ans, n, vis, "", di, dj)
+    return ans
+n = 4
+m = [[1, 0, 0, 0], [1, 1, 0, 1], [1, 1, 0, 0], [0, 1, 1, 1]]
+result = findpath(m, n)
+if len(result) == 0:
+    print(-1)
+else:
+    for i in range(len(result)):
+        print(result[i], end=" ")
+    print()    

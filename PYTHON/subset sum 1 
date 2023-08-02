@@ -1,0 +1,14 @@
+'''subset sum which derives the sum of all positive subsets'''
+def subsetsum(ind, sum, arr, temp):
+    if(ind == len(arr)):
+        temp.append(sum)
+        return
+    subsetsum(ind+1, sum+arr[ind],arr,temp)
+    subsetsum(ind+1, sum, arr, temp)
+def solve(arr):
+    temp = []
+    subsetsum(0, 0, arr, temp)
+    temp.sort()
+    return temp
+arr = [1, 2, 3, 4, 5]
+print(solve(arr))
